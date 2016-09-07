@@ -15,7 +15,7 @@ public class Node {
     public double gpa;
     
     Node next;
-    Node previous;
+    Node prev;
     
     // Constructor 1
     public Node(int id, String name, double gpa){
