@@ -24,16 +24,23 @@ public class DoublyLinkedList {
             System.out.println("ERROR");
         }else{
             this.tail = this.tail.prev;
-            this.tail.next = null;
+            if(tail == null)//check if list contains just one element
+                this.head = this.tail;
+            else
+                this.tail.next = null;
         }
     }
     
     public void popFront(){
         if (isEmpty()){
+            //list is empty, cannot pop
             System.out.println("ERROR");
         }else{
             this.head = this.head.next;
-            this.head.prev = null;
+            if(head == null)//check if list contains just one element
+                this.tail = this.head;
+            else
+                this.head.prev = null;
         }
     }
     
@@ -57,22 +64,24 @@ public class DoublyLinkedList {
     
     public void pushFront(Node node){
         if (isEmpty()){
+            //empty list, just add it anyway
             this.head = node;
             this.tail = this.head;
         }else{
             this.head.prev = node;
-            this.head.prev.next = this.head;
+            this.head.prev.next = this.head;//make 'node' above fully connect to the list
             this.head = this.head.prev;
         }
     }
     
     public void pushBack(Node node) {
         if (isEmpty()) {
+            //empty list, just add it anyway
             this.head = node;
             this.tail = this.head;
         } else {
             this.tail.next = node;
-            this.tail.next.prev = this.tail;
+            this.tail.next.prev = this.tail;//make 'node' above fully connect to the list
             this.tail = this.tail.next;
         }
     }
@@ -102,15 +111,14 @@ public class DoublyLinkedList {
             {
                 if(tmp.student_id == id)
                 {
-                    if(tmp.prev == null)
+                    if(tmp.prev == null)//means that we find id at the head
                         popFront();
-                    else if(tmp.next == null)
+                    else if(tmp.next == null)//means that we find id at the tail
                         popBack();
                     else
                     {
-                        //Kuy not ggez
-                        tmp.next.prev = tmp.prev;
-                        tmp.prev.next = tmp.next;
+                        tmp.next.prev = tmp.prev;//connect next node to previous node
+                        tmp.prev.next = tmp.next;//connect previous node to next node
                     }
                     return tmp;
                 }
@@ -126,9 +134,9 @@ public class DoublyLinkedList {
         {
             if(tmp == node1)
             {
-                if(tmp.next == null)
+                if(tmp.next == null)//node1 is at the tail
                     pushBack(node2);
-                else
+                else//somewhere at the middle or even at the head
                 {
                     node2.next = tmp.next;
                     node2.next.prev = node2;
@@ -140,14 +148,15 @@ public class DoublyLinkedList {
     }
     
     public void addNodeBefore(Node node1, Node node2){
+        //same concept as above method but instead, we add a node before 'node2'
         Node tmp = head;
         while(tmp != null)
         {
             if(tmp == node1)
             {
-                if(tmp.prev == null)
+                if(tmp.prev == null)//node1 is at the head
                     pushFront(node2);
-                else
+                else//somewhere at the middle or even at the tail
                 {
                     node2.prev = tmp.prev;
                     node2.prev.next = node2;
@@ -163,15 +172,15 @@ public class DoublyLinkedList {
     }
     public void merge(DoublyLinkedList list){
         if(isEmpty())
-        {
+        {//this list is empty, set head and tail to the given list's head and tail
             this.head = list.head;
             this.tail = list.tail;
         }
         else
         {
-            this.tail.next = list.head;
-            list.head.prev = this.tail;
-            this.tail = list.tail;
+            this.tail.next = list.head;//connect tail with the given list's head
+            list.head.prev = this.tail;//connect the given list's head with tail
+            this.tail = list.tail;//change tail's position
         }
     }
     
@@ -200,6 +209,7 @@ public class DoublyLinkedList {
         if (isEmpty()) {
             return new Node("Empty List!");
         } else {
+            //we simply compare first 2 elements at the very first loop, but, sure we also check if it has only one element in a list
             Node tmp = head.next;
             int id = head.student_id;
             double max = head.gpa;

@@ -22,6 +22,8 @@ public class Node {
         this.student_id = id;
         this.name = name;
         this.gpa = gpa;
+        this.next = null;
+        this.prev = null;
     }
     // Constructor 2
     public Node(String name){
