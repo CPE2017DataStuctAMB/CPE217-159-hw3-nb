@@ -152,8 +152,7 @@ public class DoublyLinkedList {
         Node tmp = head;
         while(tmp != null)
         {
-            if(tmp == node1)
-            {
+            if(tmp == node1){
                 if(tmp.prev == null)//node1 is at the head
                     pushFront(node2);
                 else//somewhere at the middle or even at the tail
