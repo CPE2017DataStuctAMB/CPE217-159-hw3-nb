@@ -188,12 +188,9 @@ public class SinglyLinkedList {
         if (isEmpty()) {
             return new Node("Empty List!");
         } else {
-            Node tmp = head;
-            int id = tmp.student_id;
-            double max = -1;
-            //Node tmp = head.next;
-            //int id = head.student_id;
-           // double max = head.gpa;
+            Node tmp = head.next;
+            int id = head.student_id;
+            double max = head.gpa;
             while(tmp != null){
                 if(tmp.gpa >= max){
                     id = tmp.student_id;
