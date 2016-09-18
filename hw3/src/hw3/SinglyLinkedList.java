@@ -97,6 +97,7 @@ public class SinglyLinkedList {
             {
                 if(tmp.student_id == id)
                     return tmp;
+                tmp = tmp.next;
             }
             return new Node("Student Not Found!");
         }
@@ -129,14 +130,11 @@ public class SinglyLinkedList {
     
     public void addNodeAfter(Node node1, Node node2){
         Node tmp = head;
-        while(tmp != null)
-        {
-            if(tmp == node1)
-            {
+        while(tmp != null){
+            if(tmp == node1){
                 if(tmp.next == null)
-                    pushBack(node1);
-                else
-                {
+                    pushBack(node2);
+                else{
                     node2.next = tmp.next;
                     tmp.next = node2;
                 }
@@ -147,14 +145,11 @@ public class SinglyLinkedList {
     
     public void addNodeBefore(Node node1, Node node2){
         Node tmp = head, tmp2 = tmp;
-        while(tmp != null)
-        {
-            if(tmp == node1)
-            {
+        while(tmp != null){
+            if(tmp == node1){
                 if(tmp == head)
                     pushFront(node2);
-                else
-                {
+                else{
                     node2.next = tmp;
                     tmp2.next = node2;
                 }
@@ -193,13 +188,14 @@ public class SinglyLinkedList {
         if (isEmpty()) {
             return new Node("Empty List!");
         } else {
-            Node tmp = head.next;
-            int id = head.student_id;
-            double max = head.gpa;
-            while(tmp != null)
-            {
-                if(tmp.gpa >= max)
-                {
+            Node tmp = head;
+            int id = tmp.student_id;
+            double max = -1;
+            //Node tmp = head.next;
+            //int id = head.student_id;
+           // double max = head.gpa;
+            while(tmp != null){
+                if(tmp.gpa >= max){
                     id = tmp.student_id;
                     max = tmp.gpa;
                 }
